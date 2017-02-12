@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+<h:head>
+    <h:outputStylesheet name="css/primefaces-custom.css" />
+</h:head>
+
+<h:body>
+
+    <br />
+    <br />
+
+    <h:form id="form">
+        <p:growl id="messages" showDetail="true" />
+
+        <p:dataTable id="allPersons" var="person" value="#{personController.persons}" selectionMode="single" scrollable="true" scrollHeight="290"
+                     selection="#{personController.selectedPerson}" rowKey="#{person.id}">
+
+            <p:ajax event="rowSelect" update=":form:personDetail" />
+
+            <f:facet name="header">
+                <h:outputText style="color: #2779aa; font-weight: bold;" value="List of Persons" />
+                <p:commandButton id="toggler" type="button" value="Columns filter" style="float:left; font-size: 67%" icon="ui-icon-grip-solid-horizontal" />
+                <p:columnToggler datasource="allPersons" trigger="toggler" />
+            </f:facet>
+
+            <p:column headerText="Id" sortBy="#{person.id}" filterBy="#{person.id}">
+                <h:outputText value="#{person.id}" />
+            </p:column>
+            <p:column headerText="Name" sortBy="#{person.name}" filterBy="#{person.name}">
+                <h:outputText value="#{person.name}" />
+            </p:column>
+            <p:column headerText="Surname" sortBy="#{person.surname}" filterBy="#{person.surname}">
+                <h:outputText value="#{person.surname}" />
+            </p:column>
+            <p:column headerText="Email" sortBy="#{person.email}" filterBy="#{person.email}">
+                <h:outputText value="#{person.email}" />
+            </p:column>
+            <p:column headerText="Gender" sortBy="#{person.gender}" filterBy="#{person.gender}">
+                <h:outputText value="#{person.gender}" />
+            </p:column>
+            <p:column headerText="Birth day" sortBy="#{person.birthDay}" filterBy="#{person.birthDay}">
+                <h:outputText value="#{person.birthDay}" pattern="dd-MM-yyyy HH" />
+            </p:column>
+            <p:column headerText="Address" sortBy="#{person.address}" filterBy="#{person.address}">
+                <h:outputText value="#{person.address}" />
+            </p:column>
+            <p:column headerText="Active" sortBy="#{person.active}" filterBy="#{person.active}">
+                <h:outputText value="#{person.active}" />
+            </p:column>
+
+            <f:facet name="footer">
+                <h:outputText style="color: #2779aa; font-weight: bold;" value="Cars returned: #{personController.persons.size()}" />
+            </f:facet>
+
+        </p:dataTable>
+
+        <br />
+        <br />
+
+        <div align="center">
+            <p:outputPanel id="personDetail">
+                <h:panelGrid columns="6">
+
+                    <p:outputLabel for="id" value="Id: " />
+                    <p:inputText id="id" value="#{personController.selectedPerson.id}" disabled="true"/>
+
+                    <p:outputLabel for="name" value="Name: " />
+                    <p:inputText id="name" value="#{personController.selectedPerson.name}" />
+
+                    <p:outputLabel for="surname" value="Surname: " />
+                    <p:inputText id="surname" styleClass="required" value="#{personController.selectedPerson.surname}"/>
+
+                    <p:outputLabel for="email" value="Email: " />
+                    <p:inputText id="email" value="#{personController.selectedPerson.email}" />
+
+                    <p:outputLabel for="gender" value="Gender: " />
+                    <p:selectOneRadio id="gender" value="#{personController.selectedPerson.gender}" >
+                        <f:selectItem itemLabel="Male" itemValue="M" />
+                        <f:selectItem itemLabel="Female" itemValue="F" />
+                    </p:selectOneRadio>
+
+                    <p:outputLabel for="birthDay" value="Birthday: " />
+                    <p:calendar id="birthDay" styleClass="required" value="#{personController.selectedPerson.birthDay}" pattern="dd.MM.yyyy"/>
+
+                    <p:outputLabel for="address" value="Address: " />
+                    <p:inputText id="address" value="#{personController.selectedPerson.address}"/>
+
+                    <p:outputLabel for="active" value="Is active: " />
+                    <p:selectBooleanCheckbox id="active" value="#{personController.selectedPerson.active}"/>
+
+                </h:panelGrid>
+                <h:panelGrid columns="3" style="mso-cell-special: 10">
+                    <p:commandButton value="Update" id="updateButton" update="messages" actionListener="#{personController.doClick}"  />
+                    <p:commandButton value="Delete" update="messages" id="deleteButton" actionListener="#{personController.doClick}" />
+                    <p:commandButton value="Clear" update="messages" id="clearButton" actionListener="#{personController.doClick}" />
+                </h:panelGrid>
+            </p:outputPanel>
+        </div>
+
+    </h:form>
+
+</h:body>
+
+</html>

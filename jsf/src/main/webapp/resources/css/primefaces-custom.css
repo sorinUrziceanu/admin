@@ -1,0 +1,10 @@
+.ui-widget,
+.ui-widget .ui-widget
+{
+    font-size: 90%;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #a7deff;
+    background: #a7deff;
+}
