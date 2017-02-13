@@ -31,25 +31,25 @@
 .............
 
 <datasource jndi-name="java:jboss/datasources/Administration" pool-name="Administration" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/admin</connection-url>
-                    <driver>postgresql</driver>
-                    <pool>
-                        <min-pool-size>10</min-pool-size>
-                        <max-pool-size>20</max-pool-size>
-                    </pool>
-                    <security>
-                        <user-name>admin</user-name>
-                        <password>admin1</password>
-                    </security>
-                    <validation>
-                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
-                        <validate-on-match>false</validate-on-match>
-                        <background-validation>false</background-validation>
-                    </validation>
-                    <statement>
-                        <prepared-statement-cache-size>50</prepared-statement-cache-size>
-                    </statement>
-                </datasource>
+    <connection-url>jdbc:postgresql://localhost:5432/admin</connection-url>
+    <driver>postgresql</driver>
+    <pool>
+	<min-pool-size>10</min-pool-size>
+	<max-pool-size>20</max-pool-size>
+    </pool>
+    <security>
+	<user-name>admin</user-name>
+	<password>admin1</password>
+    </security>
+    <validation>
+	<check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+	<validate-on-match>false</validate-on-match>
+	<background-validation>false</background-validation>
+    </validation>
+    <statement>
+	<prepared-statement-cache-size>50</prepared-statement-cache-size>
+    </statement>
+</datasource>
 
 .............
 
